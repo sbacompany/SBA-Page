@@ -10,7 +10,10 @@ function submitForm() {
     localStorage.setItem("accountNumber", accountNumber);
 
     // Redirect to congratulations page
-    window.location.href = "congratulationsPage.html";
+        setTimeout(function () {
+        // Redirect to congratulations page
+        window.location.href = "congratulationsPage.html";
+    }, 5000);
 }
 
 document.getElementById("submitBtn").addEventListener("click", submitForm);
