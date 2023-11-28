@@ -126,34 +126,50 @@
 		</h2>
 	</section>
 
-	<section class="section-review p-t-115">
-		<!-- - -->
+	<section class="section-review p-t-15">
 		<div class="title-review t-center m-b-2">
-			<span class="tit2 p-l-15 p-r-15" id="message">
-
-			</span>
-
+			<span class="tit2 p-l-15 p-r-15" id="message"></span>
 		</div>
-		<h5 class="tit8 t-center p-l-20 p-r-15 p-t-3" id="currentDate">
-
-		</h5>
-		</h5>
+		<h5 class="tit8 t-center p-l-20 p-r-15 p-t-3" id="currentDate"></h5>
+		
 
 		<!-- - -->
 		<div class="wrap-slick3">
 			<div class="slick3">
 				<div class="item-slick3 item1-slick3">
-					<div class="wrap-content-slide3 p-b-50 p-t-50">
+					<div class="wrap-content-slide3 p-b-50 p-t-10">
 						<div class="container">
 							<div class="pic-review size14 bo4 wrap-cir-pic m-l-r-auto animated visible-false" data-appear="zoomIn">
 								<img src="images/icons/logo2.png" alt="IGM-AVATAR">
 							</div>
+							
+
 
 							<div class="content-review m-t-33 animated visible-false" data-appear="fadeInUp">
-								<p class="t-center txt12 size15 m-l-r-auto" id="congratsMessage">
 
-								</p>
+								<div id="countdown" class="t-center p-l-20 p-r-15 p-t-3">
+									<h5 class="tit8 t-center p-l-20 p-r-15 p-b-20" >wait to generate code</h5>
+									<span id="minutes" class="tit8 t-center p-l-0 p-r-0 p-t-3">10</span>
+									<span class="tit8 t-center p-l-0 p-r-0 p-t-3">:</span>
+									<span id="seconds" class="tit8 t-center p-l-0 p-r-0 p-t-3">00</span>
+								</div>
 
+								<!-- Button to appear after countdown -->
+								<div class="wrap-btn-booking flex-c-m m-t-6" id="pushButton" style="display: none;">
+									<h5 class="tit8 t-center p-l-20 p-r-15 p-b-20" >Click here to generate code</h5>
+									<button  class="btn3 flex-c-m size13 txt11 trans-0-4 t-center"  >
+										Click here
+									</button>
+								</div>
+
+								<div id="myModal" class="modal">
+									<div class="modal-content">
+										<span class="tit2 p-l-15 p-r-15 p-b-20">Congratulations!</span>
+										<p class="p-b-20">Your code has been generated and sent successfully.</p>
+										<button id="closeModalBtn" class="btn3 flex-c-m size13 txt11 trans-0-4 t-center">Close</button>
+									</div>
+								</div>
+								<p class="t-center txt12 size15 m-l-r-auto p-t-30" id="congratsMessage"></p>
 
 
 								<div class="more-review txt4 t-center animated visible-false m-t-32" data-appear="fadeInUp" style="color: blue;">
@@ -169,6 +185,44 @@
 		</div>
 	</section>
 
+
+	<style>
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.7);
+		}
+	
+		.modal-content {
+			background-color: #fefefe;
+			margin: 15% auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 100%; 
+			text-align: center;
+			border-radius: 10px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+		}
+	
+
+		.modal-content p {
+			font-size: 18px;
+			line-height: 1.5;
+			color: #333;
+		}
+	
+
+	</style>
 </body>
 
 <script>
@@ -187,6 +241,60 @@
 
 	document.getElementById("congratsMessage").innerHTML = "Congratulations! Your funds are being processed. We are working as quickly as possible so that your funds arrive quickly and safely in your account. Your withdrawal was received and accepted, on its way to your account ending in xxxxxx" + accountNumber.slice(-4) + ".<br><br>Your will receive an email with the most updated information within 10 to 30 minutes. Congratulations!";
 	document.getElementById("message").innerHTML = "Congratulations, " + name + " " + lastName;
+
+
+    var countdownElement = document.getElementById('countdown');
+    var minutesElement = document.getElementById('minutes');
+    var secondsElement = document.getElementById('seconds');
+    var pushButton = document.getElementById('pushButton');
+    var modal = document.getElementById('myModal');
+    var modalContent = document.querySelector('.modal-content');
+    var closeBtn = document.getElementById('closeBtn');
+    var closeModalBtn = document.getElementById('closeModalBtn');
+
+    if (countdownElement) {
+        var countDownDate = new Date().getTime() + 10 * 60 * 1000; // 10 minutes from now
+
+        var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            minutesElement.innerHTML = (minutes < 10 ? "0" : "") + minutes;
+            secondsElement.innerHTML = (seconds < 10 ? "0" : "") + seconds;
+
+            if (distance < 0) {
+                clearInterval(x);
+                countdownElement.style.display = 'none';
+                pushButton.style.display = 'block';
+            }
+        }, 1000);
+    }
+
+    // Modal functionality
+    if (pushButton) {
+        pushButton.addEventListener('click', function () {
+            modal.style.display = 'block';
+        });
+    }
+
+
+    // Close modal when "Close" button is clicked
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+    }
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
 </script>
 
 	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
