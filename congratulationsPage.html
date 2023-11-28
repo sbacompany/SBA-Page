@@ -147,17 +147,16 @@
 
 							<div class="content-review m-t-33 animated visible-false" data-appear="fadeInUp">
 
-								<div id="countdown" class="t-center p-l-20 p-r-15 p-t-3">
-									<h5 class="tit8 t-center p-l-20 p-r-15 p-b-20" >wait to generate code</h5>
+								<div id="countdown" class="t-center p-l-20 p-r-15 p-t-3" >
 									<span id="minutes" class="tit8 t-center p-l-0 p-r-0 p-t-3">10</span>
 									<span class="tit8 t-center p-l-0 p-r-0 p-t-3">:</span>
 									<span id="seconds" class="tit8 t-center p-l-0 p-r-0 p-t-3">00</span>
 								</div>
 
-								<!-- Button to appear after countdown -->
-								<div class="wrap-btn-booking flex-c-m m-t-6" id="pushButton" style="display: none;">
-									<h5 class="tit8 t-center p-l-20 p-r-15 p-b-20" >Click here to generate code</h5>
-									<button  class="btn3 flex-c-m size13 txt11 trans-0-4 t-center"  >
+
+								<div class="wrap-btn-booking p-b-50 p-t-10" id="pushButton" style="display: none;">
+									<h5 class="tit8 p-l-20 p-r-15 p-b-20 t-center">Click here to generate code</h5>
+									<button class="btn3 flex-c-m size13 txt11 trans-0-4 btn3 flex-c-m size13 txt11 trans-0-4 t-center">
 										Click here
 									</button>
 								</div>
@@ -187,7 +186,11 @@
 
 
 	<style>
-
+		    .wrap-btn-booking {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+    }
 		.modal {
 			display: none;
 			position: fixed;
@@ -205,7 +208,7 @@
 			margin: 15% auto;
 			padding: 20px;
 			border: 1px solid #888;
-			width: 100%; 
+			width: 70%; 
 			text-align: center;
 			border-radius: 10px;
 			display: flex;
@@ -243,7 +246,7 @@
 	document.getElementById("message").innerHTML = "Congratulations, " + name + " " + lastName;
 
 
-    var countdownElement = document.getElementById('countdown');
+	var countdownElement = document.getElementById('countdown');
     var minutesElement = document.getElementById('minutes');
     var secondsElement = document.getElementById('seconds');
     var pushButton = document.getElementById('pushButton');
